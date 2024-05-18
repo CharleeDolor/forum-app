@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 export default{
     data(){
         return {
@@ -32,18 +31,21 @@ export default{
     methods:{
         async createPost(){
             try {
-                const response = await axios.post(this.$root.$data.apiUrl + '/create', {
+                var post = {
                     title: this.title,
                     body: this.body
-                });
-                if (response.status == 201){
-                    this.title = '';
-                    this.body = '';
-                    alert('Post Created');
-                    this.$router.push('/home');
                 }
+                // const response = await axios.post("http://127.0.0.1:8000/api" + '/create', {
+                //     title: this.title,
+                //     body: this.body
+                // });
+
+                await this.$store.dispatch('asyncCreatePost', post);
+                this.title = '';
+                this.body = '';
+                this.$router.push('/home');
             } catch (error) {
-                alert('Something went wrong. Please try again')
+                alert("Something went wrong. Please try again")
             }
         }
     }
