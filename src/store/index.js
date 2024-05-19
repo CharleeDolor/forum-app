@@ -18,8 +18,7 @@ export default createStore({
         loadPosts: (state) => {
             const response = axios.get("http://127.0.0.1:8000/api" + '/home');
             console.log(response.data);
-            state;
-            // state.posts = response.data.posts;
+            state.posts = response.data.posts;
         },
 
         createPost: (state, data) => {

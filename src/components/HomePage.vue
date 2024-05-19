@@ -41,7 +41,6 @@ export default {
   async beforeMount() {
     const response = await axios.get(this.$root.$data.apiUrl + '/home');
     this.posts = response.data.posts;
-    console.log(this.posts);
   },
   name: 'HomePage',
   data() {
@@ -59,8 +58,11 @@ export default {
   methods: {
     async deletePost(post) {
       const response = await axios.delete(this.$root.$data.apiUrl + "/delete/" + post.id);
-      if (response.status == 201) {
+      if (response.status == 200) {
         alert(post.title + " is Deleted");
+        // reload list. getting all from db (not optimal, might change)
+        const response = await axios.get(this.$root.$data.apiUrl + '/home');
+        this.posts = response.data.posts;
       }
     },
 

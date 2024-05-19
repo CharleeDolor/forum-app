@@ -39,9 +39,9 @@ export default {
     methods: {
         async deletePost(post) {
             const response = await axios.delete(this.$root.$data.apiUrl + "/delete/" + post.id);
-            if (response.status == 201) {
+            if (response.status == 200) {
                 alert(post.title + " is Deleted");
-                this.$router.push('/home');
+                this.$router.go(-1);
             }
         },
 
