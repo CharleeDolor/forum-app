@@ -55,4 +55,35 @@ export default {
         }
     }
 }
+
 </script>
+<style scoped>
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.pinimg.com/originals/65/79/4d/65794da1ce3e5e3537a281ad6eaba286.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            overflow: hidden;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                 left: 0;
+                width: 100%;
+                height: 100%; 
+                background-color: rgba(255, 255, 255, 0.2); 
+                z-index: -1;
+                }
+            }
+</style>
