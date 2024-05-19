@@ -73,7 +73,6 @@ export default {
       background: rgb(0, 0, 0);
       border-radius: 10px;
       padding: 60px;
-      
       box-shadow: 0 4px 12px rgba(0, 0, 0, 1);
       max-width: 500px;
       text-align: center;
@@ -89,7 +88,7 @@ export default {
  .background-image {
       position: fixed;
       top: 0;
-      right: 0;
+      left: 0;
       width: 69%;
       height: 100%;
       background-image: url('https://i.pinimg.com/originals/c5/a4/ff/c5a4ff709a571a50a46adcedd03647db.gif');
