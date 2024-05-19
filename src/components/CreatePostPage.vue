@@ -1,6 +1,7 @@
 <template>
     <NavBar></NavBar>
     <div class="container">
+        <div class="background-image"></div>
         <h1>Create New Post</h1>
         <form @submit.prevent="createPost">
             <div class="form-group">
@@ -49,10 +50,9 @@ export default {
                 }
                 
             } catch (error) {
-                alert("Something went wrong. Please try again")
+                alert("Something went wrong. Please try again!")
             }
         }
     }
 }
-
 </script>
