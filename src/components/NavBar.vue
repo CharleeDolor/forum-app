@@ -44,7 +44,7 @@
     .nav-link:nth-child(2):hover {
         background: linear-gradient(to bottom, #ff6060, white);
         color: black;
-        border: 1px solid #7cadec;
+        border: 1px solid #f57171;
         transform: scale(1.02);
         }
 

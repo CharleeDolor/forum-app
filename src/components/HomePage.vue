@@ -131,7 +131,7 @@ export default {
   .btn-view:hover {
       background: linear-gradient(to bottom, #fad338, white);
       color: black;
-      border: 1px solid #7cadec;
+      border: 1px solid #fad338;
       transform: scale(1.02);
     }
 
@@ -150,7 +150,7 @@ export default {
  .btn-edit:hover {
      background: linear-gradient(to bottom, #0cd850, white);
      color: black;
-     border: 1px solid #00801c;
+     border: 1px solid #0cd850;
      transform: scale(1.02);
   
    }
@@ -170,7 +170,7 @@ export default {
  .btn-delete:hover {
      background: linear-gradient(to bottom, #ec2b2b, white);
      color: black;
-     border: 1px solid #00801c;
+     border: 1px solid #ec2b2b;
      transform: scale(1.02);
   
    }
