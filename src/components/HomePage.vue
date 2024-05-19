@@ -1,19 +1,11 @@
 <template>
-  <nav class="navbar">
-    <div class="container d-flex justify-content-end">
-      <ul class="nav">
-        <router-link to="/logout" class="col-6">Logout</router-link>
-      </ul>
-    </div>
-  </nav>
+  <NavBar></NavBar>
   <div class="container">
     <router-link to="/create" class="btn btn-primary">Create New Post</router-link>
-    <!-- <a href="" class="btn btn-primary">Create New Post</a> -->
-    <table class="table-striped">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th width="30%">Title</th>
-          <th width="25%">Body</th>
           <th width="20%">Created At</th>
           <th width="25%">Actions</th>
         </tr>
@@ -21,14 +13,13 @@
       <tbody>
         <!-- Loop through all the posts -->
         <tr v-for="(post) in posts" :key="post">
-          <td style="padding: 10px;">{{ post.title }}</td>
-          <td style="padding: 10px;">{{ }}</td>
-          <td style="padding: 10px;">{{ post.created_at }}</td>
+          <td>{{ post.title }}</td>
+          <td>{{ this.formatDate(post.created_at) }}</td>
           <td>
-            <a href="" class="btn btn-primary mr-2 btn-sm">View</a>
-            <a href="" class="btn btn-secondary mr-2 btn-sm">Edit</a>
+            <button class="btn btn-primary m-1" @click="viewPost(post)">View</button>
+            <button @click="editPost(post)" class="btn btn-warning">Edit</button>
             <form @submit.prevent="deletePost(post)" method="POST" style="display:inline">
-              <button type="submit" class="btn btn-danger mr-2 btn-sm"
+              <button type="submit" class="btn btn-danger m-1"
                 onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
             </form>
           </td>
@@ -42,11 +33,15 @@
 
 <script>
 import axios from 'axios';
-
+import NavBar from  '@/components/NavBar.vue'
 export default {
-  async beforeMount(){
+  components: {
+    NavBar
+  },
+  async beforeMount() {
     const response = await axios.get(this.$root.$data.apiUrl + '/home');
     this.posts = response.data.posts;
+    console.log(this.posts);
   },
   name: 'HomePage',
   data() {
@@ -56,18 +51,40 @@ export default {
     }
   },
   computed: {
-    allPosts(){
+    allPosts() {
       return this.$store.dispatch('asyncLoadPosts');
     }
   },
 
-  methods:{
-    async deletePost(post){
+  methods: {
+    async deletePost(post) {
       const response = await axios.delete(this.$root.$data.apiUrl + "/delete/" + post.id);
-      if(response.status == 201){
+      if (response.status == 201) {
         alert(post.title + " is Deleted");
       }
-    }
+    },
+
+    formatDate(value) {
+      let date = new Date(value);
+      const day = date.toLocaleString('default', { day: '2-digit' });
+      const month = date.toLocaleString('default', { month: 'short' });
+      const year = date.toLocaleString('default', { year: 'numeric' });
+      return day + '-' + month + '-' + year;
+    },
+
+    viewPost(post){
+      this.$router.push({
+        path: '/show/' + post.id,
+        params: {id: post.id}
+      });
+    },
+
+    editPost(post){
+      this.$router.push({
+        path: '/edit/' + post.id,
+        params: {id: post.id}
+      });
+    },
   }
 }
 </script>

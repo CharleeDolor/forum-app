@@ -4,6 +4,8 @@ import LoginPage from '../components/LoginPage.vue'
 import RegisterPage from '../components/RegisterPage.vue'
 import HomePage from '../components/HomePage.vue'
 import CreatePostPage from '../components/CreatePostPage.vue'
+import PostDetailsPage from '../components/PostDetailsPage.vue'
+import EditPostPage from '../components/EditPostPage.vue'
 
 const routes = [
   { path: '/', component: LoginPage, name: 'login' },
@@ -33,6 +35,30 @@ const routes = [
     name: 'create',
     component: CreatePostPage,
     beforeEnter: (to, from, next) => {
+      if(localStorage.getItem('token')){
+        next();
+      } else {
+        next('/');
+      }
+    }
+  },
+  {
+    path: '/show/:id',
+    name: 'PostDetailsPage',
+    component: PostDetailsPage,
+    beforeEnter: (to, from, next) => {
+      if(localStorage.getItem('token')){
+        next();
+      } else {
+        next('/');
+      }
+    }
+  },
+  {
+    path: '/edit/:id',
+    name: 'EditPostPage',
+    component: EditPostPage,
+    beforeEnter: (to, from, next)=> {
       if(localStorage.getItem('token')){
         next();
       } else {

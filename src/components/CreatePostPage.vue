@@ -1,4 +1,5 @@
 <template>
+    <NavBar></NavBar>
     <div class="container">
         <h1>Create New Post</h1>
         <form @submit.prevent="createPost">
@@ -19,8 +20,13 @@
 </template>
 
 <script>
-export default{
-    data(){
+import axios from 'axios';
+import NavBar from '@/components/NavBar.vue'
+export default {
+    components: {
+        NavBar
+    },
+    data() {
         return {
             title: '',
             body: '',
@@ -28,22 +34,20 @@ export default{
         };
     },
 
-    methods:{
-        async createPost(){
+    methods: {
+        async createPost() {
             try {
-                var post = {
+                const response = await axios.post("http://127.0.0.1:8000/api" + '/create', {
                     title: this.title,
                     body: this.body
-                }
-                // const response = await axios.post("http://127.0.0.1:8000/api" + '/create', {
-                //     title: this.title,
-                //     body: this.body
-                // });
+                });
 
-                await this.$store.dispatch('asyncCreatePost', post);
-                this.title = '';
-                this.body = '';
-                this.$router.push('/home');
+                if(response.status == 201){
+                    this.title = '';
+                    this.body = '';
+                    this.$router.go(-1);
+                }
+                
             } catch (error) {
                 alert("Something went wrong. Please try again")
             }
