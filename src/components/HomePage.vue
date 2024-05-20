@@ -102,8 +102,9 @@ export default {
       border: 1px solid #000000;
       transition: all 0.3s ease; 
       margin-top: 50px;
-        margin-right: 50px; 
-        text-decoration: none;
+      margin-right: 50px; 
+      margin-bottom: 30px; 
+      text-decoration: none;
     }
 
   .btn-create:hover {
@@ -202,6 +203,7 @@ export default {
         padding: 10px;
         width: 80%;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 1); 
+        margin-top: 20px;
         animation: float 5s infinite;
       }
 

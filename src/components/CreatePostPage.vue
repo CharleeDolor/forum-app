@@ -12,9 +12,9 @@
                 <label for="content">Content</label>
                 <textarea class="form-control" v-model="body" id="body" name="body" rows="5"></textarea>
             </div>
-            <div class="container">
-                <router-link to="/home" class="btn btn-secondary m-2">Back</router-link>
-                <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="button-container">
+                <router-link to="/home" class="btn-back">Back</router-link>
+                <button type="submit" class="btn-submit">Submit</button>
             </div>
         </form>
     </div>
@@ -58,11 +58,19 @@ export default {
 
 </script>
 <style scoped>
+
 .container {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100vh; 
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+  box-sizing: border-box; 
+  padding: 20px;
+  overflow: hidden; 
 }
+
 
 .background-image {
             position: fixed;
@@ -70,11 +78,12 @@ export default {
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://i.pinimg.com/originals/65/79/4d/65794da1ce3e5e3537a281ad6eaba286.jpg');
+            background-image: url('https://i.pinimg.com/originals/16/69/e5/1669e57761ccc67fa5e31a09a54764d0.gif');
             background-size: cover;
             background-position: center;
             z-index: -1;
             overflow: hidden;
+            filter: blur(3px); 
             &::before {
                 content: '';
                 position: absolute;
@@ -86,4 +95,53 @@ export default {
                 z-index: -1;
                 }
             }
+
+    .h1, h1, .form-group {
+    
+    color: #ffffff;
+    }
+
+    /*buttons*/
+    .button-container {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 20px;
+        }
+
+     .btn-back, .btn-submit {
+        font-size: 19px;
+        padding: 10px;
+        border-radius: 15px;
+        box-shadow: rgba(45, 35, 66, 0.5) 0 2px 4px, rgba(45, 35, 66, 0.5) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+        border: none;
+        color: white;
+        cursor: pointer;
+        border: 1px solid #000000;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        margin-right: 10px;
+        margin-bottom: 100px;
+        }
+
+    .btn-back {
+        background-color: #6a6767;
+        }
+
+     .btn-back:hover {
+        background: linear-gradient(to bottom, #6a6767, white);
+        color: black;
+        border: 1px solid #6a6767;
+        transform: scale(1.02);
+        }
+
+    .btn-submit {
+        background-color: #0096c7;
+        }
+
+     .btn-submit:hover {
+        background: linear-gradient(to bottom, #0096c7, white);
+        color: black;
+        border: 1px solid #0096c7;
+        transform: scale(1.02);
+        }
 </style>
