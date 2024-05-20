@@ -180,12 +180,22 @@ export default {
         right: 0;
         width: 100%;
         height: 100%;
-        background-image: url('https://i.pinimg.com/originals/e1/f4/d8/e1f4d8ebfe1c90e8500fff3c6acf4ab9.gif');
+        background-image: url('https://i.pinimg.com/originals/45/2a/f3/452af39e8f2977f5b5b4e3d10c5475cb.gif');
         background-size: cover;
         background-position: center;
         z-index: -1;
         filter: blur(5px); 
+        &::before {
+         content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%; 
+          background-color: rgba(111, 124, 124, 0.4); 
+          z-index: -1;
          }
+        }
        
 
 /* Table Design */

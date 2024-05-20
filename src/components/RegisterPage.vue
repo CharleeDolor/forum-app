@@ -79,7 +79,7 @@ export default {
       box-shadow: 0 4px 12px rgba(0, 0, 0, 1);
       max-width: 500px;
       text-align: center;
-      background-color: rgba(255, 255, 255, 0.4); 
+      background-color: rgba(165, 199, 187, 0.7); 
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -117,11 +117,12 @@ export default {
       right: 0;
       width: 100%;
       height: 100%;
-      background-image: url('https://i.pinimg.com/originals/b8/cb/0f/b8cb0fd2b86bbc036709351cc8325c31.gif');
+      background-image: url('https://i.pinimg.com/originals/19/b2/8c/19b28c8372aaec65623f7ee7332e74be.gif');
       background-size: cover;
       background-position: center;
       z-index: -1;
       overflow: hidden;
+      filter: blur(5px); 
          &::before {
          content: '';
           position: absolute;
@@ -129,7 +130,7 @@ export default {
           left: 0;
           width: 100%;
           height: 100%; 
-          background-color: rgba(255, 255, 255, 0.2); 
+          background-color: rgba(75,164,166, 0.4); 
           z-index: -1;
          }
        }

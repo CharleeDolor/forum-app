@@ -72,8 +72,7 @@ export default {
       margin-right: 5px;
       background: rgb(0, 0, 0);
       border-radius: 10px;
-      padding: 60px;
-    
+      padding: 60px;  
       max-width: 400px;
       text-align: center;
       background-color: rgba(255, 255, 255, 0.4); 
@@ -91,11 +90,12 @@ export default {
       left: 0;
       width: 69%;
       height: 100%;
-      background-image: url('https://i.pinimg.com/originals/c5/a4/ff/c5a4ff709a571a50a46adcedd03647db.gif');
+      background-image: url('https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/feeec363616517.5ab85b6d0686f.gif');
       background-size: cover;
       background-position: center;
       z-index: -1;
       overflow: hidden;
+      border: 1px solid #234a4b;
          &::before {
          content: '';
           position: absolute;
@@ -103,8 +103,9 @@ export default {
           left: 0;
           width: 100%;
           height: 100%; 
-          background-color: rgba(255, 255, 255, 0.2); 
+          background-color: rgba(70, 109, 110, 0.3); 
           z-index: -1;
+   
          }
        }
 
