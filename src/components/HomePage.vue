@@ -12,13 +12,13 @@
       </thead>
       <tbody>
         <!-- Loop through all the posts -->
-        <tr v-for="(post) in posts" :key="post">
+        <tr v-for="(post, index) in posts" v-bind:key="post.id">
           <td>{{ post.title }}</td>
           <td>{{ this.formatDate(post.created_at) }}</td>
           <td>
             <button class="btn btn-primary m-1" @click="viewPost(post)">View</button>
             <button @click="editPost(post)" class="btn btn-warning">Edit</button>
-            <form @submit.prevent="deletePost(post)" method="POST" style="display:inline">
+            <form @submit.prevent="deletePost(post, index)" method="POST" style="display:inline">
               <button type="submit" class="btn btn-danger m-1"
                 onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
             </form>
@@ -33,19 +33,18 @@
 
 <script>
 import axios from 'axios';
-import NavBar from  '@/components/NavBar.vue'
+import NavBar from  '@/components/NavBar.vue';
 export default {
   components: {
     NavBar
   },
-  async beforeMount() {
+  async mounted() {
     const response = await axios.get(this.$root.$data.apiUrl + '/home');
     this.posts = response.data.posts;
   },
   name: 'HomePage',
   data() {
     return {
-      // posts: this.$store.getters.posts,
       posts: []
     }
   },
@@ -56,13 +55,11 @@ export default {
   },
 
   methods: {
-    async deletePost(post) {
+    async deletePost(post, index) {
       const response = await axios.delete(this.$root.$data.apiUrl + "/delete/" + post.id);
       if (response.status == 200) {
+        this.posts.splice(index, 1);
         alert(post.title + " is Deleted");
-        // reload list. getting all from db (not optimal, might change)
-        const response = await axios.get(this.$root.$data.apiUrl + '/home');
-        this.posts = response.data.posts;
       }
     },
 
