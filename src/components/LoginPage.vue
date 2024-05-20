@@ -73,8 +73,8 @@ export default {
       background: rgb(0, 0, 0);
       border-radius: 10px;
       padding: 60px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 1);
-      max-width: 500px;
+    
+      max-width: 400px;
       text-align: center;
       background-color: rgba(255, 255, 255, 0.4); 
       display: flex;

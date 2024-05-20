@@ -17,7 +17,7 @@
         box-shadow: rgba(45, 35, 66, 0.5) 0 2px 4px, rgba(45, 35, 66, 0.5) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
         cursor: pointer;
         transition: all 0.3s ease;
-        margin-top: 80px;
+        margin-top: 250px;
         margin-right: 10px; 
         text-decoration: none;
     }
