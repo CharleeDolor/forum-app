@@ -5,11 +5,10 @@ export default createStore({
     name: 'store',
     state: {
         posts: [],
-
     },
 
     getters: {
-        posts: state => {
+        allPosts: state => {
             return state.posts;
         }
     },
@@ -17,8 +16,8 @@ export default createStore({
     mutations: {
         loadPosts: (state) => {
             const response = axios.get("http://127.0.0.1:8000/api" + '/home');
-            console.log(response.data);
-            state.posts = response.data.posts;
+            console.log(response);
+            state.posts = response.data;
         },
 
         createPost: (state, data) => {
@@ -39,8 +38,14 @@ export default createStore({
     },
 
     actions: {
-        asyncLoadPosts(context){
-            context.commit('loadPosts');
+        asyncLoadPosts({ commit }){
+            // context.commit('loadPosts');
+            return new Promise(() => {
+                setTimeout(() => {
+                    commit('loadPosts');
+                    // resolve(data);
+                }, 1000);
+            });
         },
 
         asyncCreatePost({ commit }, data) {
