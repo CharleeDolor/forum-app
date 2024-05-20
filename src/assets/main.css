@@ -1,0 +1,23 @@
+/*main.css*/
+/* color palette from <https://github.com/vuejs/theme> */
+
+    #app {
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; 
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        
