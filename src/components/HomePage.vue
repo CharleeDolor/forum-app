@@ -3,6 +3,7 @@
   <div class="container">
     <div class="background-image"></div>
     <router-link to="/create" class="btn-create">Create New Post</router-link>
+    <div class="table-wrapper">
     <table class="table">
       <thead>
         <tr>
@@ -31,6 +32,7 @@
       <button @click="closeDeleteModal" class="btn-cancel">No</button>
     </div>
   </div>
+</div>
   <router-view />
 </template>
 
@@ -101,6 +103,7 @@ export default {
 
 <style scoped>
 
+
  /*delete modal*/
  .modal-overlay {
       position: fixed;
@@ -124,8 +127,13 @@ export default {
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
     }
 
+  
   /*buttons*/
   .btn-create {
+      position: fixed;
+      top: 0px; 
+      left: 50px; 
+      z-index: 1000;
       padding: 10px;
       border-radius: 15px;
       box-shadow: rgba(45, 35, 66, 0.5) 0 2px 4px, rgba(45, 35, 66, 0.5) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
@@ -282,6 +290,39 @@ export default {
        
 
 /* Table Design */
+    .table-wrapper {
+      max-height: calc(95vh - 100px);
+      width: 100%; 
+      overflow-y: auto; 
+      margin: auto; 
+      margin-top: 80px;
+      }
+
+      .table thead {
+        width: 100%;
+        position: sticky;
+        top: 0;
+        background-color: #44c0ab; 
+        z-index: 1; 
+      }
+      .table-wrapper::-webkit-scrollbar {
+        width: 8px; 
+        background-color: transparent;
+      }
+
+      .table-wrapper::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.3); 
+        border-radius: 4px; 
+      }
+
+      .table-wrapper::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(0, 0, 0, 0.5); 
+      }
+
+      .table-wrapper::-webkit-scrollbar-track {
+        background-color: transparent; 
+      }
+
       .modal-group {
         margin: 1rem;
         display: flex;
@@ -289,12 +330,11 @@ export default {
         align-items: start;
       }
       table {
-        background: #4ac2ae;
         border-radius: 10px; 
         border-collapse: collapse;
         margin: auto;
         padding: 10px;
-        width: 80%;
+        width: 100%;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 1); 
         margin-top: 20px;
         animation: float 5s infinite;
@@ -302,8 +342,8 @@ export default {
 
       th {
         background: rgb(255, 255, 255, 0.5);
-        background: #44c0ab;
-        border-bottom: 4px solid #471c12;
+        background: #31b0d5,;
+        border-bottom: 4px solid #000000;
         border-right: 1px solid #343a45;
         font-size: 20px;
         font-weight: bold;
@@ -311,6 +351,14 @@ export default {
         text-align: center;
         text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
         vertical-align: middle;
+      }
+
+     
+      .table thead th:nth-child(1),
+      .table thead th:nth-child(2),
+      .table thead th:nth-child(3) {
+        background: linear-gradient(to bottom, #31b0d5, #b6d7e0);
+        
       }
 
       th:first-child {
@@ -324,9 +372,8 @@ export default {
 
 
       tr {
-        
-        border-top: 1px solid #c1c3d1;
-        border-bottom: 1px solid #3fbda8;
+        border-top: 1px solid #000000;
+        border-bottom: 1.5px solid #000000;
         color: #432d27;
         font-size: 16px;
         font-weight: normal;
@@ -334,9 +381,9 @@ export default {
       }
 
       tr:hover td {
-        background: #1d8876;
+        background: linear-gradient(to bottom, #216f86, #74b5c7);
         color: #ffffff;
-        border-top: 1px solid #277367;
+        border-top: 1px solid #274873;
       }
 
 
@@ -351,7 +398,7 @@ export default {
 
 
       tr:nth-child(odd):hover td {
-        background: #3db7a2;
+        background: linear-gradient(to bottom, #216f86, #74b5c7);
       }
 
       tr:last-child td:first-child {
@@ -367,7 +414,7 @@ export default {
         }
 
       td {
-        background: rgb(255, 255, 255, 0.5);
+        background: rgb(255, 255, 255, 0.1);
         padding: 20px;
         vertical-align: middle;
         font-weight: 300;
