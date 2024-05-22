@@ -121,7 +121,7 @@ export default {
       width: 300px;
       border-radius: 10px;
       text-align: center;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
     }
 
   /*buttons*/
