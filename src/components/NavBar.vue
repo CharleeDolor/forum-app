@@ -45,16 +45,14 @@
 
 .container {
     position: relative;
-
-
   }
   /*router links*/
   .navbar {
     position: fixed;
-  top: 10px; /* Adjust as needed */
- right: 50px; /* Adjust as needed */
-  z-index: 1000;
-}
+    top: 10px; 
+    right: 50px; 
+    z-index: 1000;
+    }
   .nav-link {
     padding: 10px;
     border-radius: 15px;
@@ -79,16 +77,16 @@
   }
   
   .nav-link:nth-child(1):hover {
-    background: linear-gradient(to bottom, #7cadec, white);
+    background: linear-gradient(to bottom, #00b8e6, white);
     color: black;
-    border: 1px solid #7cadec;
+    border: 1px solid #0d1825;
     transform: scale(1.02);
   }
   
   .nav-link:nth-child(2):hover {
-    background: linear-gradient(to bottom, #ff6060, white);
+    background: linear-gradient(to bottom, #ff3333, white);
     color: black;
-    border: 1px solid #f57171;
+    border: 1px solid #2e0a0a;
     transform: scale(1.02);
   }
   
@@ -159,16 +157,16 @@
   }
   
   .confirm-button:hover {
-    background: linear-gradient(to bottom, #ff6060, white);
+    background: linear-gradient(to bottom, #ff0000, white);
     color: black;
-    border: 1px solid #f57171;
+    border: 1px solid #2e0707;
     transform: scale(1.02);
   }
   
   .cancel-button:hover {
     background: linear-gradient(to bottom, #6a6767, white);
     color: black;
-    border: 1px solid #6a6767;
+    border: 1px solid #1f1e1e;
     transform: scale(1.02);
  
   }

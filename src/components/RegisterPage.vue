@@ -109,6 +109,7 @@ export default {
       border: 1px solid #408d8e;
       transform: scale(1.02);
       border-radius: 5rem;
+      border: 1px solid #000000;
     }
        /*bg image*/
  .background-image {

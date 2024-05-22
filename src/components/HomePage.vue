@@ -148,6 +148,14 @@ export default {
       margin-bottom: 30px; 
       text-decoration: none;
     }
+
+    .btn-create:hover {
+    background: linear-gradient(to bottom, #5293f5, white);
+        color: black;
+        border: 1px solid #102033;
+        transform: scale(1.02);
+    }
+
    
   .btn-confirm, .btn-cancel {
     margin: 10px 5px;
@@ -172,9 +180,9 @@ export default {
   
 
   .btn-confirm:hover {
-     background: linear-gradient(to bottom, #ec2b2b, white);
+     background: linear-gradient(to bottom, #ff0000, white);
      color: black;
-     border: 1px solid #ec2b2b;
+     border: 1px solid #360b0b;
      transform: scale(1.02);
    }
 
@@ -191,19 +199,13 @@ export default {
   }
 
   .btn-cancel:hover {
-     background: linear-gradient(to bottom, #5bc0de, white);
+     background: linear-gradient(to bottom, #31b0d5, white);
      color: black;
-     border: 1px solid #31b0d5;
+     border: 1px solid #0f343f;
      transform: scale(1.02);
   }
 
 
-  .btn-create:hover {
-    background: linear-gradient(to bottom, #7cadec, white);
-        color: black;
-        border: 1px solid #7cadec;
-        transform: scale(1.02);
-    }
 
   .btn-view {
       padding: 10px;
@@ -218,9 +220,9 @@ export default {
     }
 
   .btn-view:hover {
-      background: linear-gradient(to bottom, #fad338, white);
+      background: linear-gradient(to bottom, #e6b800, white);
       color: black;
-      border: 1px solid #fad338;
+      border: 1px solid #352c0b;
       transform: scale(1.02);
     }
 
@@ -237,9 +239,9 @@ export default {
    }
 
  .btn-edit:hover {
-     background: linear-gradient(to bottom, #0cd850, white);
+     background: linear-gradient(to bottom, #00b33c, white);
      color: black;
-     border: 1px solid #0cd850;
+     border: 1px solid #0a3d1b;
      transform: scale(1.02);
   
    }
@@ -257,9 +259,9 @@ export default {
    }
 
  .btn-delete:hover {
-     background: linear-gradient(to bottom, #ec2b2b, white);
+     background: linear-gradient(to bottom, #ff0000, white);
      color: black;
-     border: 1px solid #ec2b2b;
+     border: 1px solid #360909;
      transform: scale(1.02);
   
    }
