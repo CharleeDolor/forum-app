@@ -12,29 +12,32 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Loop through all the posts -->
         <tr v-for="(post, index) in posts" v-bind:key="post.id">
           <td>{{ post.title }}</td>
           <td>{{ this.formatDate(post.created_at) }}</td>
           <td>
             <button class="btn-view btn-primary m-1" @click="viewPost(post)">View</button>
             <button @click="editPost(post)" class="btn-edit btn-warning">Edit</button>
-            <form @submit.prevent="deletePost(post, index)" method="POST" style="display:inline">
-              <button type="submit" class="btn-delete btn-danger m-1"
-                onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
-            </form>
+            <button @click="openDeleteModal(post, index)" class="btn-delete btn-danger m-1">Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <!-- the router view is where all the routes are rendered -->
+  <div v-if="showModal" class="modal-overlay">
+    <div class="modal-content">
+      <p>Are you sure you want to delete this post?</p>
+      <button @click="confirmDelete" class="btn-confirm">Yes</button>
+      <button @click="closeDeleteModal" class="btn-cancel">No</button>
+    </div>
+  </div>
   <router-view />
 </template>
 
+
 <script>
 import axios from 'axios';
-import NavBar from  '@/components/NavBar.vue';
+import NavBar from '@/components/NavBar.vue';
 export default {
   components: {
     NavBar
@@ -43,27 +46,35 @@ export default {
     const response = await axios.get(this.$root.$data.apiUrl + '/home');
     this.posts = response.data.posts;
   },
-  name: 'HomePage',
   data() {
     return {
-      posts: []
-    }
+      posts: [],
+      showModal: false,
+      postToDelete: null,
+      postIndexToDelete: null
+    };
   },
-  computed: {
-    allPosts() {
-      return this.$store.dispatch('asyncLoadPosts');
-    }
-  },
-
   methods: {
-    async deletePost(post, index) {
-      const response = await axios.delete(this.$root.$data.apiUrl + "/delete/" + post.id);
-      if (response.status == 200) {
-        this.posts.splice(index, 1);
-        alert(post.title + " is Deleted");
-      }
+    openDeleteModal(post, index) {
+      this.postToDelete = post;
+      this.postIndexToDelete = index;
+      this.showModal = true;
     },
-
+    closeDeleteModal() {
+      this.showModal = false;
+      this.postToDelete = null;
+      this.postIndexToDelete = null;
+    },
+    async confirmDelete() {
+      if (this.postToDelete) {
+        const response = await axios.delete(this.$root.$data.apiUrl + "/delete/" + this.postToDelete.id);
+        if (response.status == 200) {
+          this.posts.splice(this.postIndexToDelete, 1);
+          alert(this.postToDelete.title + " is sucessfully deleted");
+        }
+      }
+      this.closeDeleteModal();
+    },
     formatDate(value) {
       let date = new Date(value);
       const day = date.toLocaleString('default', { day: '2-digit' });
@@ -71,14 +82,12 @@ export default {
       const year = date.toLocaleString('default', { year: 'numeric' });
       return day + '-' + month + '-' + year;
     },
-
     viewPost(post){
       this.$router.push({
         path: '/show/' + post.id,
         params: {id: post.id}
       });
     },
-
     editPost(post){
       this.$router.push({
         path: '/edit/' + post.id,
@@ -89,7 +98,32 @@ export default {
 }
 </script>
 
+
 <style scoped>
+
+ /*delete modal*/
+ .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 15px;
+      width: 300px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
   /*buttons*/
   .btn-create {
       padding: 10px;
@@ -106,6 +140,55 @@ export default {
       margin-bottom: 30px; 
       text-decoration: none;
     }
+   
+  .btn-confirm, .btn-cancel {
+    margin: 10px 5px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s ease;
+  }
+
+  .btn-confirm {
+    padding: 10px;
+     border-radius: 15px;
+     box-shadow: rgba(45, 35, 66, 0.5) 0 2px 4px, rgba(45, 35, 66, 0.5) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+     background-color: #ff0000;
+     border: none;
+     color: white;
+     cursor: pointer;
+     border: 1px solid #000000;
+     transition: all 0.3s ease; 
+   }
+  
+
+  .btn-confirm:hover {
+     background: linear-gradient(to bottom, #ec2b2b, white);
+     color: black;
+     border: 1px solid #ec2b2b;
+     transform: scale(1.02);
+   }
+
+  .btn-cancel {
+    padding: 10px;
+     border-radius: 15px;
+     box-shadow: rgba(45, 35, 66, 0.5) 0 2px 4px, rgba(45, 35, 66, 0.5) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+     background-color: #31b0d5;
+     border: none;
+     color: white;
+     cursor: pointer;
+     border: 1px solid #000000;
+     transition: all 0.3s ease; 
+  }
+
+  .btn-cancel:hover {
+     background: linear-gradient(to bottom, #5bc0de, white);
+     color: black;
+     border: 1px solid #31b0d5;
+     transform: scale(1.02);
+  }
+
 
   .btn-create:hover {
     background: linear-gradient(to bottom, #7cadec, white);

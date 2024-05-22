@@ -7,6 +7,7 @@ import CreatePostPage from '../components/CreatePostPage.vue'
 import PostDetailsPage from '../components/PostDetailsPage.vue'
 import EditPostPage from '../components/EditPostPage.vue'
 
+
 const routes = [
   { path: '/', component: LoginPage, name: 'login' },
   { path: '/register', component: RegisterPage, name: 'register' },
