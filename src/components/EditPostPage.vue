@@ -18,28 +18,36 @@
 
 <script>
 import axios from 'axios';
-export default{
-    async beforeMount(){
+export default {
+    async beforeMount() {
         const response = await axios.get(this.$root.$data.apiUrl + "/show/" + this.$route.params.id)
-        this.title = response.data.post.title
-        this.body = response.data.post.body
+        this.initialTitle = response.data.post.title
+        this.initialBody = response.data.post.body
+        this.title = this.initialTitle
+        this.body = this.initialBody
     },
-    data(){
+    data() {
         return {
+            initialTitle: '',
+            initialBody: '',
             title: '',
             body: ''
         }
     },
+    methods: {
+        async editPost() {
+            // Check if title or body has been changed
+            if (this.title === this.initialTitle && this.body === this.initialBody) {
+                alert('No changes were made to the post. Please update.');
+                return;
+            }
 
-    methods:{
-        async editPost(){
-            const response = await axios.put(this.$root.$data.apiUrl + "/update/" + this.$route.params.id,
-            {
+            const response = await axios.put(this.$root.$data.apiUrl + "/update/" + this.$route.params.id, {
                 title: this.title,
                 body: this.body
             });
 
-            if(response.status == 200){
+            if (response.status == 200) {
                 this.title = '';
                 this.body = '';
                 alert('Post edited successfully');
