@@ -2,7 +2,7 @@
   <NavBar></NavBar>
   <div class="container">
     <div class="background-image"></div>
-    <router-link to="/create" class="btn-create">Create New Post</router-link>
+    <router-link v-if="this.getPermissions.includes('create posts')" to="/create" class="btn-create">Create New Post</router-link>
     <div class="table-wrapper">
     <table class="table">
       <thead>
@@ -18,8 +18,8 @@
           <td>{{ this.formatDate(post.created_at) }}</td>
           <td>
             <button class="btn-view btn-primary m-1" @click="viewPost(post)">View</button>
-            <button @click="editPost(post)" class="btn-edit btn-warning">Edit</button>
-            <button @click="openDeleteModal(post, index)" class="btn-delete btn-danger m-1">Delete</button>
+            <button v-if="this.getPermissions.includes('edit posts')" @click="editPost(post)" class="btn-edit btn-warning">Edit</button>
+            <button v-if="this.getPermissions.includes('delete posts')" @click="openDeleteModal(post, index)" class="btn-delete btn-danger m-1">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -47,6 +47,14 @@ export default {
   async mounted() {
     const response = await axios.get(this.$root.$data.apiUrl + '/home');
     this.posts = response.data.posts;
+
+    const permissions = await axios.get(this.$root.$data.apiUrl + '/user/permissions', {
+      headers: {
+        'Authorization' : 'Bearer ' + localStorage.getItem('token')
+      }
+    });
+
+    this.$store.dispatch('asyncLoadRoleAndPermissions', permissions.data);
   },
   data() {
     return {
@@ -55,6 +63,14 @@ export default {
       postToDelete: null,
       postIndexToDelete: null
     };
+  },
+  computed: {
+    getRole(){
+      return this.$store.getters.getRole;
+    },
+    getPermissions(){
+      return this.$store.getters.getPermissions;
+    }
   },
   methods: {
     openDeleteModal(post, index) {
@@ -69,7 +85,13 @@ export default {
     },
     async confirmDelete() {
       if (this.postToDelete) {
-        const response = await axios.delete(this.$root.$data.apiUrl + "/delete/" + this.postToDelete.id);
+        const response = await axios.delete(this.$root.$data.apiUrl + "/delete/" + this.postToDelete.id, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          },
+        });
         if (response.status == 200) {
           this.posts.splice(this.postIndexToDelete, 1);
           alert(this.postToDelete.title + " is sucessfully deleted");

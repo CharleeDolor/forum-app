@@ -5,11 +5,19 @@ export default createStore({
     name: 'store',
     state: {
         posts: [],
+        role: '',
+        permissions: []
     },
 
     getters: {
         allPosts: state => {
             return state.posts;
+        },
+        getRole: state =>{
+            return state.role;
+        },
+        getPermissions: state => {
+            return state.permissions;
         }
     },
 
@@ -20,41 +28,16 @@ export default createStore({
             state.posts = response.data;
         },
 
-        createPost: (state, data) => {
-            // eslint-disable-next-line no-useless-catch
-            try {
-                const response = axios.post("http://127.0.0.1:8000/api" + '/create', {
-                    title: data.title,
-                    body: data.body
-                });
-                if (response.status == 201) {
-                    alert('Post Created');
-                    state.posts.push(data);
-                }
-            } catch (error) {
-                throw error;
-            }
+        loadRoleAndPermissions: (state, payload) => {
+            state.role = payload.roles[0];
+            state.permissions = payload.permissions
         }
     },
 
     actions: {
-        asyncLoadPosts({ commit }){
-            // context.commit('loadPosts');
-            return new Promise(() => {
-                setTimeout(() => {
-                    commit('loadPosts');
-                    // resolve(data);
-                }, 1000);
-            });
-        },
 
-        asyncCreatePost({ commit }, data) {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    commit('createPost', data);
-                    resolve(data);
-                }, 1000);
-            });
-        },
+        asyncLoadRoleAndPermissions(context, payload){
+            context.commit('loadRoleAndPermissions', payload);
+        }
     }
 })

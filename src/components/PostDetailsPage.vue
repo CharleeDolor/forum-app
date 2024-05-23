@@ -5,10 +5,10 @@
       <p><strong>Author: {{ author.name }}</strong></p>
       <p><strong>Created At: {{ formatDate(post.created_at) }}</strong></p>
       <p>{{ post.body }}</p>
-      <button @click="editPost(post)" class="btn btn-warning m-2">Edit</button>
+      <button v-if="this.getPermissions.includes('edit posts')" @click="editPost(post)" class="btn btn-warning m-2">Edit</button>
   
       <!-- Button to open the delete modal -->
-      <button @click="openDeleteModal" class="btn btn-danger m-2">Delete</button>
+      <button v-if="this.getPermissions.includes('delete posts')" @click="openDeleteModal" class="btn btn-danger m-2">Delete</button>
   
       <!-- Delete Modal -->
       <div v-if="showModal" class="modal-overlay">
@@ -44,6 +44,15 @@
         author: '',
         showModal: false
       };
+    },
+    
+    computed: {
+        getRole() {
+            return this.$store.getters.getRole;
+        },
+        getPermissions() {
+            return this.$store.getters.getPermissions;
+        }
     },
   
     methods: {

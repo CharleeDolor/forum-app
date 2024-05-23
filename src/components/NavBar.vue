@@ -21,6 +21,7 @@
   </template>
   
   <script>
+  import axios from 'axios';
   export default {
     data() {
       return {
@@ -34,8 +35,23 @@
       hideLogoutDialog() {
         this.isDialogVisible = false;
       },
-      confirmLogout() {
-        this.$router.push('/logout');
+      async confirmLogout() {
+        try {
+            const response = await axios.post(this.$root.$data.apiUrl + '/logout', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+            });
+            if (response.status == 200) {
+                localStorage.removeItem('token');
+                alert(response.data.message);
+                this.$router.push('/');
+            }
+          } catch (error) {
+              alert(error);
+          }
       },
     },
   };
